@@ -15,6 +15,7 @@ public class Blog {
 	 * 		password
 	 * 		gender,age,etc (info)				 
 	 *   
+	 *   sa
 	 */    
 	
 }
