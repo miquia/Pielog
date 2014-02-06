@@ -11,7 +11,6 @@ public class Blog  {
 	
 	private ArrayList<Article> articles;
 	
-		
 	public Blog(StorageHandler storage){
 		articles = storage.loadArticles();
 	}
@@ -22,6 +21,10 @@ public class Blog  {
 
 	public Iterator<Article> getArticleIterator(){
 		return articles.iterator();
+	}
+	
+	public void reload(StorageHandler storage){
+		articles = storage.loadArticles();
 	}
 
 }
