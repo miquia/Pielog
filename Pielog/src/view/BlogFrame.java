@@ -13,6 +13,7 @@ import javax.swing.JEditorPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.JTextArea;
 
 public class BlogFrame extends JFrame implements BlogListener {
 	
@@ -42,8 +43,8 @@ public class BlogFrame extends JFrame implements BlogListener {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{129, 75, 106, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{38, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JTextPane jtextPane = new JTextPane();
@@ -53,6 +54,14 @@ public class BlogFrame extends JFrame implements BlogListener {
 		gbc_jtextPane.gridx = 1;
 		gbc_jtextPane.gridy = 0;
 		panel.add(jtextPane, gbc_jtextPane);
+		
+		JTextArea textArea = new JTextArea();
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 6;
+		panel.add(textArea, gbc_textArea);
 		
 		JEditorPane jeditorPane = new JEditorPane();
 		GridBagConstraints gbc_jeditorPane = new GridBagConstraints();
