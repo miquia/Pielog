@@ -10,7 +10,7 @@ public abstract class DBStore {
 	private int type;
 	
 	/**
-	 * Defines one of the supported database platforms. Use as following:<br><br>
+	 * Defines the use of one of the supported database platforms. Use as following:<br><br>
 	 * <code>defineDB(DBType.*)</code>
 	 * 
 	 * @param type <br><br>
@@ -21,10 +21,17 @@ public abstract class DBStore {
 		this.type = type;
 	}
 	
+	/**
+	 * Connect to the database
+	 * @param s
+	 * @return
+	 */
+	abstract int connectDB(String s);
 	
 	/**
 	 * Helper class to define currently supported databases. Use this 
-	 * class to pick or call a particular database from the list. 
+	 * class to pick or call a particular database from the list. The
+	 * options will grow over time as we support more databases. 
 	 * <br><br>
 	 * Example: <br> 
 	 * <code>defineDB(DBType.MYSQL);</code> 

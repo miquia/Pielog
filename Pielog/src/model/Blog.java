@@ -1,21 +1,27 @@
 package model;
 
-public class Blog {
+import java.util.ArrayList;
+import java.util.Iterator;
 
-	// This class represents the top level entity of the system. This class may generate the following tree:
+import persistence.DatabaseStorageHandler;
+import testing.FakeStorage;
+
+
+public class Blog  {
 	
-	/**
-	 * Article 
-	 * 		title 
-	 * 		timestamp
-	 * 		submitted by
-	 * 
-	 * Users
-	 * 		username
-	 * 		password
-	 * 		gender,age,etc (info)				 
-	 *   
-	 *   sa
-	 */    
+	private ArrayList<Article> articles;
 	
+		
+	public Blog(StorageHandler storage){
+		articles = storage.loadArticles();
+	}
+
+	public ArrayList<Article> getArticles() {
+		return articles;
+	}
+
+	public Iterator<Article> getArticleIterator(){
+		return articles.iterator();
+	}
+
 }
