@@ -1,22 +1,15 @@
 package testing;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 
 public class Messages {
 	
 	private FileReader file; 
 	private String data; 
-	BufferedReader br;
+	private BufferedReader br;
 	
 	public Messages() {
 		setFile();
@@ -26,10 +19,14 @@ public class Messages {
 		try {
 			file = new FileReader("C:/dev/Pielog/Pielog/src/testing/messages.properties");
 			br = new BufferedReader(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (FileNotFoundException e) {  e.printStackTrace(); 	}
+	}
+	
+	public void closeFile(){
+		try {
+			br.close();
+			file.close();
+		} catch (IOException e) { e.printStackTrace(); 	}
 	}
 
 	public String getString(String key) {
@@ -37,7 +34,7 @@ public class Messages {
 		try {
 				data = "";
 				if ( (line = br.readLine()) != null ) {
-					String temp = line; //+ "\n";
+					String temp = line; 
 					if( line.contains("Title") ) {
 						data = line;
 						return data;
@@ -57,13 +54,11 @@ public class Messages {
 					}
 				} 
 				return "";
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			e.printStackTrace();
-			return "bad"; 
+			return "NULL"; 
 		}
 	}
-		
-		
 		
 	}
 

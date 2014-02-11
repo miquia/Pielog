@@ -3,10 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import persistence.DatabaseStorageHandler;
-import testing.FakeStorage;
-
-
+/**
+ * 
+ * @author Daniel Alamo
+ *
+ */
 public class Blog  {
 	
 	private ArrayList<Article> articles;
