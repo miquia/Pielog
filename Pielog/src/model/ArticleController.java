@@ -13,6 +13,7 @@ public class ArticleController {
 				tempArticle = iterator.next();
 				System.out.println( tempArticle.getTitle()  );
 				blogController.notifyClients("Title", tempArticle.getTitle() );
+				
 				System.out.println( "" + tempArticle.getBody() + "\n" );
 				blogController.notifyClients("Body", tempArticle.getBody() );
 				i--;

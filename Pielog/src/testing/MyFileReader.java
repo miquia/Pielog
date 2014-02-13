@@ -5,13 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Messages {
+public class MyFileReader {
 	
 	private FileReader file; 
 	private String data; 
 	private BufferedReader br;
 	
-	public Messages() {
+	public MyFileReader() {
 		setFile();
 	}
 	
@@ -29,33 +29,33 @@ public class Messages {
 		} catch (IOException e) { e.printStackTrace(); 	}
 	}
 
-	public String getString(String key) {
+	public String readToken() {
 		String line = "";
 		try {
 				data = "";
-				if ( (line = br.readLine()) != null ) {
-					String temp = line; 
-					if( line.contains("Title") ) {
-						data = line;
-						return data;
-					}
-					else if ( !line.isEmpty() && br.ready() ) {
+				if ( (line = br.readLine()) != null )  {
+					if( line.contains("Title=") ) {
+						return line.replace("Title=", "");
+					}else if (line.isEmpty()) {
+						return "";
+					}else if ( br.ready() ) {
+						String nextLine = ""; 
 						do { 
-							line = br.readLine();
-							if (line.isEmpty())
-								data += temp + line  ;
+							nextLine = br.readLine();
+							if (nextLine.isEmpty())
+								data += line + nextLine  ;
 							else 
-								data += temp + "\n" + line ;
-							temp="";
-						}while ( !line.isEmpty() );
-						return data;
+								data += line + "\n" + nextLine ;
+							line = "";
+						}while ( !nextLine.isEmpty() );
+						return data.replace("Body=", "");
 					} else if (!br.ready() && !line.isEmpty()) {
 						return line;
-					}
-				} 
+					} 
+				}
 				return "";
 		} catch (Exception e) { 
-			e.printStackTrace();
+			e.printStackTrace();	
 			return "NULL"; 
 		}
 	}

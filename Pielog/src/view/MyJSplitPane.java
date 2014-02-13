@@ -3,7 +3,6 @@ package view;
 import javax.swing.JSplitPane;
 
 import java.awt.Dimension;
-import javax.swing.JTextField;
 import javax.swing.JPanel;
 
 import model.BlogController;
@@ -12,22 +11,23 @@ import model.BlogListener;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseListener;
+
 import javax.swing.JTextPane;
-import java.awt.SystemColor;
 import javax.swing.UIManager;
-import java.awt.GridLayout;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
 
 public class MyJSplitPane extends JSplitPane implements BlogListener {
 	
 	private static final long serialVersionUID = 2553383505166473146L;
-	public JTextField txtArticleTitle;
+	public TitleJTextField txtArticleTitle;
+	public JTextPane mainText;
 	private BlogController blogControl;
-	private JTextPane mainText;
 	private JPanel snippetPanel;
 	private String[] article = new String[2];
-	private JPanel leftPanel;
+	private JScrollPane scrollPane;
+	private JPanel panel_1;
 	
 	public MyJSplitPane() {
 		blogControl = new BlogController();
@@ -56,13 +56,16 @@ public class MyJSplitPane extends JSplitPane implements BlogListener {
 		splitPane.setRightComponent(mainText);
 		splitPane.setDividerLocation(34);
 		
-		leftPanel = new JPanel();
-		leftPanel.setBackground(UIManager.getColor("Panel.background"));
-		setLeftComponent(leftPanel);
-		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+		scrollPane = new JScrollPane();
+		setLeftComponent(scrollPane);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(UIManager.getColor("Panel.background"));
+		scrollPane.setViewportView(panel_1);
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 		setDividerLocation(160);
 		
-		blogControl.process(8);
+		blogControl.process(3);
 	}
 
 	@Override
@@ -73,14 +76,12 @@ public class MyJSplitPane extends JSplitPane implements BlogListener {
 				break;
 			case "Body":
 				article[1] = text;
-				snippetPanel = new SnippetJPanel(article[0], article[1], "time");
-				leftPanel.add(snippetPanel);
+				snippetPanel = new SnippetJPanel(article[0], article[1], "time", this);
+		//		snippetPanel.addMouseListener((MouseListener) snippetPanel);
+				panel_1.add(snippetPanel);
 				break;
 			default :
 				;
 		}
-		
-		
 	}
-
 }
