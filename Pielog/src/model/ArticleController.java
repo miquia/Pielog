@@ -18,6 +18,7 @@ public class ArticleController {
 				blogController.notifyClients("Body", tempArticle.getBody() );
 				i--;
 			}
+			blogController.notifyClients("Done", "");
 			System.out.println("\n\n");
 		}
 	}

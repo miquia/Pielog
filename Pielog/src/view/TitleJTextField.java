@@ -2,8 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.SystemColor;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -15,29 +13,24 @@ public class TitleJTextField extends JTextField implements FocusListener {
 
 	public TitleJTextField(){
 		this.setAlignmentX(Component.LEFT_ALIGNMENT);
-		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		this.setText(" Article Title");
-		this.setForeground(SystemColor.activeCaptionBorder);
+		this.setForeground(Color.GRAY);
 		this.setColumns(20);
 	}
 
 	@Override
 	public void focusGained(FocusEvent e) {
-		if (this.getText().equals(" Article Title") || this.getText().equals(" No Title Yet...")) { 				
+		if (this.getText().equals(" Article Title") || this.getText().equals(" No Title Yet... ")) { 				
 			this.setText("");
 			this.setForeground(Color.black);
-			this.invalidate();
 		}
 	}
 
 	@Override
 	public void focusLost(FocusEvent e) {
 		if (this.getText().equals("")) { 				
-			this.setText(" No Title Yet...");
-			this.setForeground(SystemColor.activeCaptionBorder);
-			this.invalidate();
+			this.setText(" No Title Yet... ");
+			this.setForeground(Color.GRAY);
 		}
-	}
-	
-	
+	}	
 }

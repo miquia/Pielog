@@ -1,22 +1,20 @@
 package view;
 
-import javax.swing.JSplitPane;
-
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.FocusListener;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import model.BlogController;
 import model.BlogListener;
-
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseListener;
-
-import javax.swing.JTextPane;
-import javax.swing.UIManager;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
 
 public class MyJSplitPane extends JSplitPane implements BlogListener {
 	
@@ -27,7 +25,9 @@ public class MyJSplitPane extends JSplitPane implements BlogListener {
 	private JPanel snippetPanel;
 	private String[] article = new String[2];
 	private JScrollPane scrollPane;
-	private JPanel panel_1;
+	private JPanel leftPanel;
+	private boolean removePanels = false;
+	public Runnable blogFetcherRunnable;
 	
 	public MyJSplitPane() {
 		blogControl = new BlogController();
@@ -59,17 +59,40 @@ public class MyJSplitPane extends JSplitPane implements BlogListener {
 		scrollPane = new JScrollPane();
 		setLeftComponent(scrollPane);
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(UIManager.getColor("Panel.background"));
-		scrollPane.setViewportView(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		leftPanel = new JPanel();
+		leftPanel.setBackground(UIManager.getColor("Panel.background"));
+		scrollPane.setViewportView(leftPanel);
+		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 		setDividerLocation(160);
 		
 		blogControl.process(3);
+
+//		Thread blogThread = new Thread(blogControl);
+//		blogThread.start();
+		blogFetcherRunnable = new Runnable() {
+			@Override
+			public void run() {
+				while (true){
+					try {
+						Thread.currentThread();
+						Thread.sleep(4000);
+						blogControl.process(5);
+					} catch (Exception e){ e.printStackTrace(); }
+				}
+			}
+		};
+		
+		Thread fetcher = new Thread(blogFetcherRunnable);
+
+		SwingUtilities.invokeLater(fetcher);
 	}
 
 	@Override
 	public void update(String component, String text) {
+		if (removePanels) {
+			leftPanel.removeAll();
+			removePanels = false;
+		}
 		switch (component){
 			case "Title":
 				article[0] = text;
@@ -77,11 +100,15 @@ public class MyJSplitPane extends JSplitPane implements BlogListener {
 			case "Body":
 				article[1] = text;
 				snippetPanel = new SnippetJPanel(article[0], article[1], "time", this);
-		//		snippetPanel.addMouseListener((MouseListener) snippetPanel);
-				panel_1.add(snippetPanel);
+				leftPanel.add(snippetPanel);
 				break;
-			default :
+			case "Done":
+				removePanels = true;
+				break;
+			default: 
 				;
 		}
 	}
+
+
 }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import testing.FakeStorage;
 
-public class BlogController implements BlogPlublisher, Runnable {
+public class BlogController implements BlogPlublisher /** , Runnable  */ {
 	private Blog blog;
+	private ArrayList<Article> articles;
 	private ArrayList<BlogListener> clients = new ArrayList<BlogListener>();
 	private ArticleController mArticleController = new ArticleController();
 	
@@ -38,19 +39,16 @@ public class BlogController implements BlogPlublisher, Runnable {
 			}
 		}
 	}
-
 	
-	@SuppressWarnings("static-access")
-	@Override
-	public void run() {
-		while (true){
-			try {
-				Thread.currentThread().sleep(2000);
-				blog.reload(new FakeStorage());
-				this.process(5);
-				
-			} catch (Exception e) { e.getMessage(); }
-		}
-	}
+//	@Override
+//	public void run() {
+//		while (true){
+//			try {
+//				Thread.currentThread();
+//				Thread.sleep(3000);
+//				this.process(5);
+//			} catch (Exception e) { e.getMessage(); }
+//		}
+//	}
 
 }

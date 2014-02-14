@@ -1,16 +1,14 @@
 package view;
 
-import javax.swing.JFrame;
-
-import model.BlogController;
-import model.BlogListener;
-import java.awt.Toolkit;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JSplitPane;
-import javax.swing.JMenuBar;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Locale;
+
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 public class BlogFrame extends JFrame {
 	
@@ -36,7 +34,6 @@ public class BlogFrame extends JFrame {
 		
 		JMenuBar menuBar = new MyJMenuBar();
 		setJMenuBar(menuBar);
-		
 		
 	}
 }

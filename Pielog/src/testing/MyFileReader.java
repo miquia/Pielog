@@ -17,7 +17,7 @@ public class MyFileReader {
 	
 	public void setFile(){
 		try {
-			file = new FileReader("C:/dev/Pielog/Pielog/src/testing/messages.properties");
+			file = new FileReader("C:/dan/Pielog/Pielog/src/testing/messages.properties");
 			br = new BufferedReader(file);
 		} catch (FileNotFoundException e) {  e.printStackTrace(); 	}
 	}
