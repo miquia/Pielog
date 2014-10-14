@@ -6,8 +6,24 @@ Think of this project as a "proof of concept" about the benefits of using design
 The project uses [infusionsoft](https://developer.infusionsoft.com/docs) for email-marketing automation handled by
 `infusion_helper.php` and `Infusion.php (library wrapper)`
 
-In the views, the element(s) that hold "infusionsoft" as a class and contains a `data-infuse=""` attribute that holds the tag name (from `infusion_helper.php`) you want to assign to the User upon submit. For Example:
+In the views, the element(s) that hold "infusionsoft" as a class and contains a `data-infuse=""` attribute that holds the tag name (from `infusion_helper.php`) you want to assign to the User upon a form's submit. For Example:
 ```html
 <a class="someclass infusionsoft" data-infuse="tools">
 ```
 would assign `tools` tag to the infusionsoft contact.
+
+Then, for the form you can add a hidden input element with `name="infusion_tag"` and call the `infuse()` jQuery plugin on it to make it listen to all the `data-infuse` elements on that page. For Example:
+```html
+<form action="user/register" method="post">
+  <input type="text" class="form-control" placeholder="First name" name="first_name">
+  <input type="text" class="form-control" placeholder="Last name" name="last_name">
+  <!-- Adding "infusion_tag"-->
+  <input type="hidden" name="infusion_tag" value="" />
+  <!-- See script below -->
+</form>
+<script>
+    $(document).ready(function(){
+        $('input[name="infusion_tag"]').infuse();
+    });
+</script>
+```
