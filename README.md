@@ -3,7 +3,7 @@
 Think of this project as a "proof of concept" about the benefits of using design patterns, loose coupling, modular design, etc... It's all the things you always knew you should "use" but never had time to play around with and put into practice.
 
 ###Infusion Soft
-The project uses [infusionsoft](https://developer.infusionsoft.com/docs) for email-marketing automation handled by
+The project uses [infusionsoft](https://developer.infusionsoft.com/docs) and their [PHP-iSDK](https://github.com/infusionsoft/PHP-iSDK) for email-marketing automation handled by
 `infusion_helper.php` and `Infusion.php (library wrapper)`
 
 ####the elements
