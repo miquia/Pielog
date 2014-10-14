@@ -15,10 +15,10 @@ would assign `tools` tag to the infusionsoft contact.
 Then, for the form you can add a hidden input element with `name="infusion_tag"` and call the `infuse()` jQuery plugin on it to make it listen to all the `data-infuse` elements on that page. For Example:
 ```html
 <form action="user/register" method="post">
-  <input type="text" class="form-control" placeholder="First name" name="first_name">
-  <input type="text" class="form-control" placeholder="Last name" name="last_name">
+  <input type="text" name="first_name">
+  <input type="text" name="last_name">
   <!-- Adding "infusion_tag"-->
-  <input type="hidden" name="infusion_tag" value="" />
+  <input type="hidden" name="infusion_tag" value="">
   <!-- See script below -->
 </form>
 <script>
