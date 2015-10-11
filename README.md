@@ -12,20 +12,3 @@ In the views, the element(s) should have "infusionsoft" as a class and have a `d
 <a class="someclass infusionsoft" data-infuse="tools">
 ```
 would assign `tools` tag to the infusionsoft contact.
-
-####the form
-Then, for the form you can add a hidden input element with `name="infusion_tag"` and call the `infuse()` jQuery plugin on it to make it listen to all the `data-infuse` elements on that page. For Example:
-```html
-<form action="user/register" method="post">
-  <input type="text" name="first_name">
-  <input type="text" name="last_name">
-  <!-- Adding "infusion_tag"-->
-  <input type="hidden" name="infusion_tag" value="">
-  <!-- See script below -->
-</form>
-<script>
-    $(document).ready(function(){
-        $('input[name="infusion_tag"]').infuse();
-    });
-</script>
-```
